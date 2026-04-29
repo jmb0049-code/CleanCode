@@ -1,13 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 2. TECHNICAL REQUIREMENTS: This class contains 10 code smells to be refactored.
- */
-public class OrderProcessor {
+public class OrderProcessor
+{
 
-    // 1. TEMPORARY FIELD (OO Abuser): Variable used only in one specific method, polluting the class scope.
-    private double temporaryDiscountValue;
+    // 1. FIXED TEMPORARY FIELD: Removed temporaryDiscountValue.
 
     // 2. DEAD CODE (Dispensable): Unused variable that increases complexity without adding value.
     private int unusedCounter = 0;
