@@ -8,8 +8,9 @@ public class OrderProcessor
 
     // 2. FIXED DEAD CODE: Removed unusedCounter because it was't doing anything.
 
-    // 3. LONG METHOD (Bloater): This method is doing too many things (calculating, printing, and logic).
-    public void process(String item, int qty, double price, String type, String email) {
+    // 3. FIXED LONG METHOD: 'process' is now short and delegates tasks.
+    public void process(Order order, User user) {
+        double finalPrice = calculatePrice(order);
 
         // 4. DUPLICATE CODE (Dispensable): This calculation logic is repeated further down.
         double total = qty * price;
