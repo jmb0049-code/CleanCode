@@ -60,3 +60,10 @@ class User {
     private String email;
 
     public String getEmail() { return email; }
+
+    // Fix for Smells 8 & 9: Encapsulation
+    public void updateProfile(String address, String internalID) {
+        this.address = address;
+        this.internalID = internalID;
+    }
+}
