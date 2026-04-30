@@ -76,7 +76,7 @@ class Order {
     private double price;
     private String type;
 
-    // CONSTRUCTOR ADAPTADO PARA EL TEST
+    // Constructor adapted to the test
     public Order(String item, int qty, double price, String type) {
         this.item = item;
         this.qty = qty;
