@@ -23,8 +23,13 @@ public class OrderProcessorTest {
         // Navigate to a test website to ensure environment stability
         driver.get("https://the-internet.herokuapp.com/");
 
-        // Execute processing logic on the legacy code to verify functionality
-        processor.process("Laptop", 1, 1200.0, "ELECTRONICS", "test@example.com");
+        // 1. FIXED: We create the objects that your refactored method now expects.
+        // This solves the "Expected 2 arguments but found 5" error.
+        Order myOrder = new Order("Laptop", 1, 1200.0, "ELECTRONICS");
+        User myUser = new User("test@example.com");
+
+        // 2. FIXED: Call the process method with the correct 2 arguments.
+        processor.process(myOrder, myUser);
 
         // Assertion to confirm the test is "Green" if no exceptions are thrown
         assert(driver.getTitle() != null);

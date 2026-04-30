@@ -3,30 +3,26 @@ import java.util.List;
 
 public class OrderProcessor
 {
-
     // 1. FIXED TEMPORARY FIELD: Removed temporaryDiscountValue.
+    // 2. FIXED DEAD CODE: Removed unusedCounter because it wasn't doing anything.
 
-    // 2. FIXED DEAD CODE: Removed unusedCounter because it was't doing anything.
-
-    // 3. FIXED LONG METHOD: process is shorter and delegate tasks.
+    // 3. FIXED LONG METHOD: process is shorter and delegates tasks.
     public void process(Order order, User user) {
         double finalPrice = calculatePrice(order);
-        //6. FIXED FEATURE ENVY: Logic separated into a unique method.
+        // 6. FIXED FEATURE ENVY: Logic separated into a unique method.
         notifyUser(user, finalPrice);
-        //7. FIXED DUPLICATE CODE: Reuse the logic for the audit.
+        // 7. FIXED DUPLICATE CODE: Reuse the logic for the audit.
         logAudit(order);
     }
 
     // 4. FIXED DUPLICATE CODE: Single method for the core calculation.
-    private double calculatePrice(Order order)
-    {
+    private double calculatePrice(Order order) {
         double total = order.getQty() * order.getPrice();
         double totalWithTax = applyTax(total);
 
-        // 5. FIXED SWITCH STATEMENT: Logic moved to Order class.
+        // 5. FIXED SWITCH STATEMENT: Logic moved to Order class (Polymorphism/Logic move).
         return order.applyDiscount(totalWithTax);
     }
-
 
     private void notifyUser(User user, double price) {
         if (user.getEmail().contains("@")) {
@@ -36,16 +32,16 @@ public class OrderProcessor
     }
 
     private void logAudit(Order order) {
-        // Reuse calculation instead of repeating qty * price * 0.21
+        // Reuse calculation instead of repeating qty * price * 1.21
         double auditTotal = applyTax(order.getQty() * order.getPrice());
         System.out.println("Audit log: " + auditTotal);
     }
+
     // 8. FIXED INAPPROPRIATE INTIMACY & 9. LARGE CLASS:
-    // Instead of touching 'user.address', we call a method on User.
+    // Instead of touching 'user.address' directly, we call a method on User.
     public void intimateAccess(User user) {
         user.updateProfile("New Street", "999");
     }
-
 
     // 10. FIXED SHOTGUN SURGERY: Centralized tax calculation.
     private double applyTax(double amount) {
@@ -59,6 +55,11 @@ class User {
     private String internalID;
     private String email;
 
+    // CONSTRUCTOR ADAPTADO PARA EL TEST
+    public User(String email) {
+        this.email = email;
+    }
+
     public String getEmail() { return email; }
 
     // Fix for Smells 8 & 9: Encapsulation
@@ -67,11 +68,21 @@ class User {
         this.internalID = internalID;
     }
 }
-// Helper class to organize data (Fixes Large Class)
+
+// Helper class to organize data (Fixes Large Class / Long Parameter List)
 class Order {
+    private String item;
     private int qty;
     private double price;
     private String type;
+
+    // CONSTRUCTOR ADAPTADO PARA EL TEST
+    public Order(String item, int qty, double price, String type) {
+        this.item = item;
+        this.qty = qty;
+        this.price = price;
+        this.type = type;
+    }
 
     public int getQty() { return qty; }
     public double getPrice() { return price; }
