@@ -67,3 +67,19 @@ class User {
         this.internalID = internalID;
     }
 }
+// Helper class to organize data (Fixes Large Class)
+class Order {
+    private int qty;
+    private double price;
+    private String type;
+
+    public int getQty() { return qty; }
+    public double getPrice() { return price; }
+
+    // Fix for 5. SWITCH STATEMENT: The object decides its own discount.
+    public double applyDiscount(double total) {
+        if ("ELECTRONICS".equals(type)) return total - 10;
+        if ("CLOTHES".equals(type)) return total - 5;
+        return total;
+    }
+}
