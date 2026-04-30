@@ -28,7 +28,18 @@ public class OrderProcessor
     }
 
 
+    private void notifyUser(User user, double price) {
+        if (user.getEmail().contains("@")) {
+            System.out.println("Sending email to " + user.getEmail());
+            System.out.println("Total: " + price);
+        }
+    }
 
+    private void logAudit(Order order) {
+        // Reuse calculation instead of repeating qty * price * 0.21
+        double auditTotal = applyTax(order.getQty() * order.getPrice());
+        System.out.println("Audit log: " + auditTotal);
+    }
     // 8. INAPPROPRIATE INTIMACY (Coupler): Accessing private-like data of another class directly.
     // 9. LARGE CLASS (Bloater): This class is handling too many different responsibilities.
     public void intimateAccess(User user) {
