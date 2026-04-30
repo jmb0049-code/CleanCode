@@ -47,15 +47,16 @@ public class OrderProcessor
     }
 
 
-// 10. SHOTGUN SURGERY (Change Preventer): A single change in tax rules requires modifications in multiple places.
-class TaxCalculator {
-    public double applyIVA(double amount) {
+    // 10. FIXED SHOTGUN SURGERY: Centralized tax calculation.
+    private double applyTax(double amount) {
         return amount * 1.21;
     }
 }
 
-// Extra - DIVERGENT CHANGE (Change Preventer): Class changes for multiple unrelated reasons (address, IDs).
+// Fixed DIVERGENT CHANGE: User now controls its own data.
 class User {
-    public String address;
-    public String internalID;
-}
+    private String address;
+    private String internalID;
+    private String email;
+
+    public String getEmail() { return email; }
