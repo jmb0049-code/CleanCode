@@ -11,7 +11,8 @@ public class OrderProcessorTest {
     private OrderProcessor processor;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp()
+    {
         // Automatically configures the Chrome driver binaries
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
@@ -19,7 +20,8 @@ public class OrderProcessorTest {
     }
 
     @Test
-    public void testOrderProcessingFlow() {
+    public void testOrderProcessingFlow()
+    {
         // Navigate to a test website to ensure environment stability
         driver.get("https://the-internet.herokuapp.com/");
 
@@ -36,9 +38,11 @@ public class OrderProcessorTest {
     }
 
     @AfterEach
-    public void tearDown() {
+    public void tearDown()
+    {
         // Properly close the browser session after each test execution
-        if (driver != null) {
+        if (driver != null)
+        {
             driver.quit();
         }
     }

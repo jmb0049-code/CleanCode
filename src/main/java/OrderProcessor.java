@@ -7,7 +7,8 @@ public class OrderProcessor
     // 2. FIXED DEAD CODE: Removed unusedCounter because it wasn't doing anything.
 
     // 3. FIXED LONG METHOD: process is shorter and delegates tasks.
-    public void process(Order order, User user) {
+    public void process(Order order, User user)
+    {
         double finalPrice = calculatePrice(order);
         // 6. FIXED FEATURE ENVY: Logic separated into a unique method.
         notifyUser(user, finalPrice);
@@ -16,7 +17,8 @@ public class OrderProcessor
     }
 
     // 4. FIXED DUPLICATE CODE: Single method for the core calculation.
-    private double calculatePrice(Order order) {
+    private double calculatePrice(Order order)
+    {
         double total = order.getQty() * order.getPrice();
         double totalWithTax = applyTax(total);
 
@@ -24,14 +26,17 @@ public class OrderProcessor
         return order.applyDiscount(totalWithTax);
     }
 
-    private void notifyUser(User user, double price) {
-        if (user.getEmail().contains("@")) {
+    private void notifyUser(User user, double price)
+    {
+        if (user.getEmail().contains("@"))
+        {
             System.out.println("Sending email to " + user.getEmail());
             System.out.println("Total: " + price);
         }
     }
 
-    private void logAudit(Order order) {
+    private void logAudit(Order order)
+    {
         // Reuse calculation instead of repeating qty * price * 1.21
         double auditTotal = applyTax(order.getQty() * order.getPrice());
         System.out.println("Audit log: " + auditTotal);
@@ -39,24 +44,28 @@ public class OrderProcessor
 
     // 8. FIXED INAPPROPRIATE INTIMACY & 9. LARGE CLASS:
     // Instead of touching 'user.address' directly, we call a method on User.
-    public void intimateAccess(User user) {
+    public void intimateAccess(User user)
+    {
         user.updateProfile("New Street", "999");
     }
 
     // 10. FIXED SHOTGUN SURGERY: Centralized tax calculation.
-    private double applyTax(double amount) {
+    private double applyTax(double amount)
+    {
         return amount * 1.21;
     }
 }
 
 // Fixed DIVERGENT CHANGE: User now controls its own data.
-class User {
+class User
+{
     private String address;
     private String internalID;
     private String email;
 
     // CONSTRUCTOR ADAPTADO PARA EL TEST
-    public User(String email) {
+    public User(String email)
+    {
         this.email = email;
     }
 
@@ -69,12 +78,12 @@ class User {
     }
 }
 
-// Helper class to organize data (Fixes Large Class / Long Parameter List)
-class Order {
-    private String item;
-    private int qty;
-    private double price;
-    private String type;
+    // Helper class to organize data (Fixes Large Class / Long Parameter List)
+    class Order {
+        private String item;
+        private int qty;
+        private double price;
+        private String type;
 
     // Constructor adapted to the test
     public Order(String item, int qty, double price, String type) {
